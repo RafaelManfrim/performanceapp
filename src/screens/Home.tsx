@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, ScrollView } from 'react-native';
 import { FriendsList } from '../components/FriendsList';
 
@@ -12,6 +12,13 @@ export function Home() {
     setFriends(data)
   }
 
+  const handleFollow = useCallback(() => {
+    console.log('follow user')
+  }, [])
+
+  // Memoriza a função, e só recria quando algo no array de dependencias mudar
+  // Útil para funções que são passadas como props para componentes e que não mudam sua lógica facilmente
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Amigos</Text>
@@ -20,7 +27,7 @@ export function Home() {
       <Button title="Buscar" onPress={handleSearch} />
 
       <ScrollView style={{ marginTop: 20 }}>
-        <FriendsList data={friends} />
+        <FriendsList data={friends} follow={handleFollow} />
       </ScrollView>
     </View>
   );

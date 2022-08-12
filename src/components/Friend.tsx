@@ -1,17 +1,23 @@
 import React, { memo } from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 interface ItemProps {
   data: {
     id: number;
     name: string;
     likes: number;
-  }
+  },
+  follow: () => void
 }
 
-function FriendComponent({ data }: ItemProps) {
+function FriendComponent({ data, follow }: ItemProps) {
   return (
-    <Text>{data.name} - Likes: {data.likes}</Text>
+    <View>
+      <Text>{data.name} - Likes: {data.likes}</Text>
+      <TouchableOpacity onPress={follow}>
+        <Text>Seguir</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 

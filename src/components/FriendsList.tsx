@@ -7,10 +7,11 @@ interface ItemProps {
     id: number;
     name: string;
     likes: number;
-  }[]
+  }[],
+  follow: () => void
 }
 
-export function FriendsList({ data }: ItemProps) {
+export function FriendsList({ data, follow }: ItemProps) {
   // const totalLikes = data.reduce((likes, friend) => likes + friend.likes, 0);
   // Por mais que o cálculo não é um calculo complexo, pela quantidade de dados ele acaba se tornando mais pesado e gerando lentidão.
 
@@ -26,7 +27,7 @@ export function FriendsList({ data }: ItemProps) {
     <View>
       <Text>Total de likes: {totalLikes}</Text>
       {data.map(friend => (
-        <Friend key={String(friend.id)} data={friend} />
+        <Friend key={String(friend.id)} data={friend} follow={follow} />
       ))}
     </View>
   );
